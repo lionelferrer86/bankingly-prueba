@@ -1,7 +1,5 @@
 #!/usr/bin/env node
-/**
- * Genera reporte ejecutivo de tickets en HTML estático (CSS inline).
- */
+/** Genera reporte ejecutivo de tickets en HTML estático. */
 
 import fs from 'fs';
 import path from 'path';
@@ -11,6 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DATA_PATH = path.join(__dirname, '..', 'data.json');
 const OUTPUT_DIR = path.join(__dirname, 'output');
 
+// Traducción de categorías al español para el reporte
 const CATEGORY_ES = {
   'Production Incident': 'Incidente de producción',
   'Certification Issue': 'Problema de certificación',
@@ -60,10 +59,12 @@ function buildReport(tickets) {
     const sev = getSeverity(t);
     const clientKey = getClientKey(t);
 
+    // Agrupaciones por severidad, estado y categoría
     report.bySeverity[sev] = (report.bySeverity[sev] || 0) + 1;
     report.byStatus[t.status] = (report.byStatus[t.status] || 0) + 1;
     report.byCategory[t.category] = (report.byCategory[t.category] || 0) + 1;
 
+    // TTR y CSAT solo para tickets cerrados
     if (t.status === 'Closed') {
       const ttr = calculateTTR(t);
       if (ttr !== null) {
@@ -78,6 +79,7 @@ function buildReport(tickets) {
       }
     }
 
+    // Clientes en riesgo: escalados, Critical sin workaround, o Critical/High abiertos
     const isCriticalOrHigh = sev === 'Critical' || sev === 'High';
     const isOpen = t.status === 'Open' || t.status === 'In Progress';
     const isEscalated = t.status === 'Escalated';
@@ -112,6 +114,7 @@ function buildReport(tickets) {
     }
   }
 
+  // Promedios de TTR y CSAT por severidad
   report.ttrAll.avgHours = calcAvg(report.ttrAll.tickets);
   const calcCsatAvg = (arr) =>
     arr.length ? arr.reduce((s, x) => s + x.csat, 0) / arr.length : null;
@@ -121,17 +124,19 @@ function buildReport(tickets) {
     report.ttrBySeverity[s].avgHours = calcAvg(report.ttrBySeverity[s]);
     report.csatBySeverity[s].avg = calcCsatAvg(report.csatBySeverity[s]);
   }
-  report.clientsAtRisk.sort((a, b) => b.count - a.count);
+  report.clientsAtRisk.sort((a, b) => b.count - a.count); // más tickets primero
 
   return report;
 }
 
 function toHtml(report) {
+  // Helpers para formatear números y generar filas/links
   const fmt = (h) => (h != null ? `${h.toFixed(1)} h` : 'N/A (sin datos)');
   const fmtCsat = (v) => (v != null ? v.toFixed(1) : 'N/A (sin datos)');
   const link = (id) => `<a href="#${id}" class="ticket-link">${id}</a>`;
   const row = (label, val) => `<tr><td>${label}</td><td class="num">${val}</td></tr>`;
 
+  // Filas para resumen (severidad, estado, categoría)
   const severityRows = Object.entries(report.bySeverity)
     .sort((a, b) => b[1] - a[1])
     .map(([k, v]) => row(k, v))
@@ -142,6 +147,7 @@ function toHtml(report) {
     .map(([k, v]) => row(CATEGORY_ES[k] || k, v))
     .join('');
 
+  // Tarjetas de clientes en riesgo
   const clientsHtml =
     report.clientsAtRisk.length === 0
       ? '<p>No se identificaron clientes en riesgo.</p>'
@@ -152,6 +158,7 @@ function toHtml(report) {
           )
           .join('');
 
+  // Filas de TTR y CSAT por severidad
   const SEVERITY_ORDER = ['Critical', 'High', 'Medium', 'Low'];
   const ttrRows =
     `<tr><td>Global (todos cerrados)</td><td class="num">${fmt(report.ttrAll.avgHours)} promedio</td><td class="num">${report.ttrAll.tickets.length} tickets</td></tr>` +
@@ -166,6 +173,7 @@ function toHtml(report) {
         `<tr><td>${s} (cerrados)</td><td class="num">${fmtCsat(report.csatBySeverity[s]?.avg)}</td><td class="num">${report.csatBySeverity[s]?.length ?? 0} tickets</td></tr>`
     ).join('');
 
+  // Plantilla HTML del reporte
   return `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -194,7 +202,7 @@ function toHtml(report) {
 </section>
 <section class="block">
 <h2>3. CSAT (satisfacción del cliente)</h2>
-<p class="note">Calificación 1-5 en tickets cerrados. Promedio por ticket.</p>
+<p class="note">Calificación 1-5 en tickets cerrados. Promedio por severidad.</p>
 <table>
 <tbody>${csatRows}</tbody>
 </table>
@@ -209,6 +217,7 @@ ${clientsHtml}
 </html>`;
 }
 
+// Punto de entrada: carga datos, genera el reporte y escribe el HTML
 function main() {
   if (!fs.existsSync(DATA_PATH)) {
     console.error('No se encontró data.json en', DATA_PATH);
