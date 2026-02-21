@@ -16,16 +16,20 @@ El reporte se genera en `output/reporte-ejecutivo.html` — HTML estático con C
 
 ## Contenido del reporte
 
-1. **Agrupaciones**
+1. **Resumen por criterios**
    - Por severidad (Critical, High, Medium, Low)
    - Por estado (Open, Closed, In Progress, Escalated, Waiting for Client)
-   - Por categoría (Production Incident, Certification Issue, etc.)
+   - Por categoría (traducida al español)
 
 2. **TTR (Tiempo de Resolución)**
-   - Promedio para tickets **Critical** y **High** cerrados
-   - *Calculado desde `closed_at` - `created_at`*
+   - Promedio global y por severidad (Critical, High, Medium, Low) para tickets cerrados
+   - *Calculado desde `closed_at` - `created_at` en horas*
 
-3. **Clientes en riesgo**
+3. **CSAT (satisfacción del cliente)**
+   - Calificación 1-5 en tickets cerrados
+   - Promedio global y por severidad
+
+4. **Clientes en riesgo**
    - Clientes con tickets Critical/High abiertos o en progreso
    - Clientes con tickets escalados
    - Clientes con Critical sin workaround disponible
