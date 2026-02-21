@@ -1,0 +1,7 @@
+{
+  "name": "ticket-report",
+  "version": "1.0.0",
+  "description": "Generador de reporte ejecutivo de tickets TAM",
+  "main": "generate-report.js",
+  "type": "module"
+}

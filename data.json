@@ -1,0 +1,900 @@
+{
+  "dataset_meta": {
+    "name": "Bankingly TAM Support - Realistic Dataset",
+    "multi_tenant": true,
+    "notes": "Tickets con descripciones vagas, estados críticos sin respuesta inmediata y ausencia de soluciones mágicas."
+  },
+  "tickets": [
+    {
+      "ticket_id": "TCK-0001",
+      "status": "Open",
+      "client": {
+        "tenant_id": "TEN-ECU-SSD",
+        "institution_name": "Cooperativa Sol del Sur",
+        "country": "EC"
+      },
+      "category": "Production Incident",
+      "module": "Interbank Transfers",
+      "public": {
+        "summary": "Reclamos masivos por transferencias",
+        "customer_description": "Muchos socios llaman diciendo que la plata no llega a destino. La app se queda pensando y luego da error. Necesitamos saber si es general.",
+        "steps_to_reproduce": [
+          "Hacer una transferencia"
+        ],
+        "actual_result": "Error después de 30 segundos",
+        "public_thread": []
+      },
+      "internal": {
+        "severity": "Critical",
+        "priority": "P0",
+        "issue_family": "INTERBANK_TIMEOUT",
+        "workaround": null,
+        "notes": "Reporte inicial. No hay comunicación aún con el cliente porque estamos revisando logs de infraestructura."
+      },
+      "created_at": "2026-01-17T09:00:00-05:00",
+      "first_response_at": "2026-01-17T15:00:00-05:00",
+      "closed_at": null
+    },
+    {
+      "ticket_id": "TCK-0002",
+      "status": "In Progress",
+      "client": {
+        "tenant_id": "TEN-MEX-AZT",
+        "institution_name": "Banco Azteca Norte",
+        "country": "MX"
+      },
+      "category": "Production Incident",
+      "module": "API Access",
+      "public": {
+        "summary": "Fallas en la conexión API",
+        "customer_description": "Nuestros socios comerciales ven errores al intentar pagar. Dicen que sale un mensaje de Gateway Error.",
+        "public_thread": [
+          {
+            "at": "2026-02-12T16:20:00-06:00",
+            "author": "tam",
+            "message": "Hola. ¿Tendrían algún ID de transacción o el mensaje de error completo que les arroja?"
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Critical",
+        "priority": "P0",
+        "issue_family": "GATEWAY_504",
+        "workaround": null,
+        "notes": "Es un 504. El cliente no ha enviado logs. Estamos a ciegas esperando respuesta."
+      },
+      "created_at": "2026-02-12T19:20:00-05:00",
+      "first_response_at": "2026-02-12T16:20:00-06:00",
+      "closed_at": null
+    },
+    {
+      "ticket_id": "TCK-0003",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Banco San Gabriel",
+        "country": "CO"
+      },
+      "category": "Production Incident",
+      "module": "Interbank Transfers",
+      "public": {
+        "summary": "Error de a ratos en web",
+        "customer_description": "A veces falla la transferencia en la web. No siempre pasa.",
+        "public_thread": [
+          {
+            "at": "2026-02-11T16:30:00-05:00",
+            "author": "tam",
+            "message": "Ajustamos los tiempos de respuesta. Por favor avisen si vuelve a ocurrir."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "High",
+        "priority": "P1",
+        "workaround": null,
+        "notes": "Se estabilizó tras reiniciar el adaptador. No se encontró causa raíz clara."
+      },
+      "created_at": "2026-02-11T18:30:00-05:00",
+      "first_response_at": "2026-02-11T16:30:00-05:00",
+      "closed_at": "2026-02-11T22:30:00-05:00",
+      "csat": 4
+    },
+    {
+      "ticket_id": "TCK-0004",
+      "status": "Open",
+      "client": {
+        "institution_name": "Banco del Sur",
+        "country": "AR"
+      },
+      "category": "Production Incident",
+      "module": "Login / MFA",
+      "public": {
+        "summary": "Socios no pueden entrar (SMS)",
+        "customer_description": "El código para entrar no llega al celular. Los usuarios están bloqueando sus cuentas de tanto intentar.",
+        "public_thread": []
+      },
+      "internal": {
+        "severity": "Critical",
+        "priority": "P0",
+        "issue_family": "MFA_SMS_LATENCY",
+        "workaround": null,
+        "notes": "Incidente crítico abierto. Proveedor regional caído. Sin respuesta al cliente hasta tener un ETA."
+      },
+      "created_at": "2026-01-20T09:00:00-05:00",
+      "first_response_at": "2026-01-20T15:00:00-05:00",
+      "closed_at": null
+    },
+    {
+      "ticket_id": "TCK-0005",
+      "status": "In Progress",
+      "client": {
+        "institution_name": "Banco Azteca Norte",
+        "country": "MX"
+      },
+      "category": "Production Incident",
+      "module": "Login / MFA",
+      "public": {
+        "summary": "Problemas con el OTP",
+        "customer_description": "Llega tarde el código. Cuando el socio lo pone, ya venció.",
+        "public_thread": [
+          {
+            "at": "2026-02-11T18:40:00-06:00",
+            "author": "tam",
+            "message": "Estamos revisando con el carrier local. ¿Pasa con todas las operadoras?"
+          }
+        ]
+      },
+      "internal": {
+        "severity": "High",
+        "priority": "P1",
+        "workaround": null,
+        "notes": "Cola de mensajes acumulada en el proveedor."
+      },
+      "created_at": "2026-02-11T21:40:00-05:00",
+      "first_response_at": "2026-02-11T18:40:00-06:00",
+      "closed_at": null
+    },
+    {
+      "ticket_id": "TCK-0006",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Cooperativa Caribe",
+        "country": "DO"
+      },
+      "category": "Production Incident",
+      "module": "Login / MFA",
+      "public": {
+        "summary": "Demora SMS",
+        "customer_description": "Socio muy molesto porque no puede entrar por culpa del SMS.",
+        "public_thread": [
+          {
+            "at": "2026-02-10T12:00:00-04:00",
+            "author": "tam",
+            "message": "Servicio normalizado."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Medium",
+        "priority": "P2",
+        "workaround": null,
+        "notes": "Cerrado por flujo normal detectado en monitoreo."
+      },
+      "created_at": "2026-02-10T13:00:00-05:00",
+      "first_response_at": "2026-02-10T12:00:00-04:00",
+      "closed_at": "2026-02-10T17:00:00-05:00",
+      "csat": 3
+    },
+    {
+      "ticket_id": "TCK-0007",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Cooperativa Cordillera",
+        "country": "CL"
+      },
+      "category": "Production Incident",
+      "module": "Wallet / Internal Transfers",
+      "public": {
+        "summary": "Doble débito detectado",
+        "customer_description": "A un socio se le descontó dos veces la misma transferencia interna.",
+        "public_thread": []
+      },
+      "internal": {
+        "severity": "Critical",
+        "priority": "P0",
+        "issue_family": "DUPLICATE_TRANSACTION",
+        "workaround": "Manual: Reversar en el core bancario.",
+        "notes": "Resuelto con parche. Reversión manual aplicada. Bug en doble submit corregido."
+      },
+      "created_at": "2026-01-23T09:00:00-05:00",
+      "first_response_at": "2026-01-23T15:00:00-05:00",
+      "closed_at": "2026-01-24T11:00:00-05:00",
+      "csat": 2
+    },
+    {
+      "ticket_id": "TCK-0008",
+      "status": "In Progress",
+      "client": {
+        "institution_name": "Banco San Gabriel",
+        "country": "CO"
+      },
+      "category": "Production Incident",
+      "module": "Admin Portal Reports",
+      "public": {
+        "summary": "Lentitud extrema en portal",
+        "customer_description": "No podemos sacar los reportes de fin de mes. Tarda demasiado.",
+        "public_thread": [
+          {
+            "at": "2026-02-06T11:20:00-05:00",
+            "author": "tam",
+            "message": "Estamos analizando el rendimiento de la base de datos."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Medium",
+        "priority": "P2",
+        "workaround": "Sugerir filtrar por rangos de fecha más cortos.",
+        "notes": "La query está haciendo un scan completo por falta de índice."
+      },
+      "created_at": "2026-02-06T13:20:00-05:00",
+      "first_response_at": "2026-02-06T11:20:00-05:00",
+      "closed_at": null
+    },
+    {
+      "ticket_id": "TCK-0009",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Cooperativa Río de la Plata",
+        "country": "UY"
+      },
+      "category": "Production Incident",
+      "module": "Service Payments",
+      "public": {
+        "summary": "Pagos aprobados no impactan en proveedor",
+        "customer_description": "El socio paga la luz en la app, sale OK, pero la empresa de luz dice que no tiene el pago.",
+        "public_thread": [
+          {
+            "at": "2026-01-21T13:50:00-03:00",
+            "author": "tam",
+            "message": "Corregido problema de comunicación con el proveedor de servicios."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "High",
+        "priority": "P1",
+        "workaround": null,
+        "notes": "Falla en el procesamiento de callbacks."
+      },
+      "created_at": "2026-01-21T13:50:00-05:00",
+      "first_response_at": "2026-01-21T13:50:00-03:00",
+      "closed_at": "2026-01-21T17:50:00-05:00",
+      "csat": 4
+    },
+    {
+      "ticket_id": "TCK-0010",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Banco Pura Vida",
+        "country": "CR"
+      },
+      "category": "Production Incident",
+      "module": "Chatbot",
+      "public": {
+        "summary": "Chatbot responde doble",
+        "customer_description": "El WhatsApp manda dos veces el mismo mensaje de saldo.",
+        "public_thread": [
+          {
+            "at": "2026-01-29T10:00:00-05:00",
+            "author": "tam",
+            "message": "Ajustamos la lógica de reintentos."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Medium",
+        "priority": "P2",
+        "workaround": null,
+        "notes": "Deduplicación activa en el webhook handler."
+      },
+      "created_at": "2026-01-29T12:00:00-05:00",
+      "first_response_at": "2026-01-29T10:00:00-05:00",
+      "closed_at": "2026-01-29T16:00:00-05:00",
+      "csat": 5
+    },
+    {
+      "ticket_id": "TCK-0011",
+      "status": "Open",
+      "client": {
+        "institution_name": "Caja Andina",
+        "country": "PE"
+      },
+      "category": "Production Incident",
+      "module": "Push Notifications",
+      "public": {
+        "summary": "Falla en notificaciones push",
+        "customer_description": "Los usuarios de Android dejaron de recibir avisos de compras.",
+        "public_thread": []
+      },
+      "internal": {
+        "severity": "Medium",
+        "priority": "P2",
+        "workaround": null,
+        "notes": "Sin comentarios al cliente. Revisando si las credenciales de FCM expiraron."
+      },
+      "created_at": "2026-01-27T09:00:00-05:00",
+      "first_response_at": "2026-01-27T15:00:00-05:00",
+      "closed_at": null
+    },
+    {
+      "ticket_id": "TCK-0012",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Banco Azteca Norte",
+        "country": "MX"
+      },
+      "category": "Production Incident",
+      "module": "Account Statements",
+      "public": {
+        "summary": "PDF de estado de cuenta vacío",
+        "customer_description": "Cuando bajan el resumen, sale una hoja en blanco.",
+        "public_thread": [
+          {
+            "at": "2026-02-01T12:00:00-06:00",
+            "author": "tam",
+            "message": "Corregido problema de renderizado."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Medium",
+        "priority": "P2",
+        "workaround": null,
+        "notes": "Caracteres especiales en el nombre del cliente causaban error en el motor de PDF."
+      },
+      "created_at": "2026-02-01T15:00:00-05:00",
+      "first_response_at": "2026-02-01T12:00:00-06:00",
+      "closed_at": "2026-02-01T19:00:00-05:00",
+      "csat": 4
+    },
+    {
+      "ticket_id": "TCK-0013",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Cooperativa Río de la Plata",
+        "country": "UY"
+      },
+      "category": "Certification Issue",
+      "module": "API Access",
+      "public": {
+        "summary": "Error 403 en UAT",
+        "customer_description": "No podemos probar las APIs. Da firma inválida.",
+        "public_thread": [
+          {
+            "at": "2026-02-05T12:00:00-03:00",
+            "author": "tam",
+            "message": "Revisen la sincronización de hora de su servidor."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "High",
+        "priority": "P1",
+        "workaround": null,
+        "notes": "Era clock skew en el servidor del cliente."
+      },
+      "created_at": "2026-02-05T12:00:00-05:00",
+      "first_response_at": "2026-02-05T12:00:00-03:00",
+      "closed_at": "2026-02-05T16:00:00-05:00",
+      "csat": 3
+    },
+    {
+      "ticket_id": "TCK-0014",
+      "status": "Waiting for Client",
+      "client": {
+        "institution_name": "Cooperativa Caribe",
+        "country": "DO"
+      },
+      "category": "Certification Issue",
+      "module": "Digital Onboarding",
+      "public": {
+        "summary": "Biometría no avanza",
+        "customer_description": "En el alta de socios, el círculo se queda cargando y no toma la foto.",
+        "public_thread": [
+          {
+            "at": "2026-02-07T13:50:00-04:00",
+            "author": "tam",
+            "message": "¿En qué modelos de teléfono están probando?"
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Medium",
+        "priority": "P2",
+        "workaround": null,
+        "notes": "Probablemente hardware no compatible o cámara sucia."
+      },
+      "created_at": "2026-02-07T14:50:00-05:00",
+      "first_response_at": "2026-02-07T13:50:00-04:00",
+      "closed_at": null
+    },
+    {
+      "ticket_id": "TCK-0015",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Financiera Laguna",
+        "country": "NI"
+      },
+      "category": "Certification Issue",
+      "module": "Core Integration",
+      "public": {
+        "summary": "Error 500 al conectar core",
+        "customer_description": "La integración en UAT da error 500 constante.",
+        "public_thread": [
+          {
+            "at": "2026-02-03T09:20:00-06:00",
+            "author": "tam",
+            "message": "Ajustamos el mapeo de cuentas."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "High",
+        "priority": "P1",
+        "workaround": null,
+        "notes": "El core devolvía un tipo de cuenta no registrado."
+      },
+      "created_at": "2026-02-03T12:20:00-05:00",
+      "first_response_at": "2026-02-03T09:20:00-06:00",
+      "closed_at": "2026-02-03T16:20:00-05:00",
+      "csat": 4
+    },
+    {
+      "ticket_id": "TCK-0016",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Banco del Sur",
+        "country": "AR"
+      },
+      "category": "Certification Issue",
+      "module": "OAuth / SSO",
+      "public": {
+        "summary": "Falla login SSO",
+        "customer_description": "En UAT ya no entra con el usuario de red.",
+        "public_thread": [
+          {
+            "at": "2026-02-14T20:20:00-03:00",
+            "author": "tam",
+            "message": "Actualicen la URL de redirección en su servidor."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Medium",
+        "priority": "P2",
+        "workaround": null,
+        "notes": "Cambiaron el dominio de UAT y no el redirect del IdP."
+      },
+      "created_at": "2026-02-14T20:20:00-05:00",
+      "first_response_at": "2026-02-14T20:20:00-03:00",
+      "closed_at": "2026-02-15T00:20:00-05:00",
+      "csat": 4
+    },
+    {
+      "ticket_id": "TCK-0017",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Banco San Gabriel",
+        "country": "CO"
+      },
+      "category": "App Store Release",
+      "module": "Mobile App",
+      "public": {
+        "summary": "Apple rechazó la app v4.19",
+        "customer_description": "Rechazo de Apple. Dicen que falta algo del login social.",
+        "public_thread": []
+      },
+      "internal": {
+        "severity": "Critical",
+        "priority": "P0",
+        "issue_family": "STORE_REJECTION_APPLE",
+        "workaround": null,
+        "notes": "Cliente implementó Sign In with Apple. App aprobada."
+      },
+      "created_at": "2026-02-02T09:00:00-05:00",
+      "first_response_at": "2026-02-02T15:00:00-05:00",
+      "closed_at": "2026-02-03T14:00:00-05:00",
+      "csat": 5
+    },
+    {
+      "ticket_id": "TCK-0018",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Cooperativa Río de la Plata",
+        "country": "UY"
+      },
+      "category": "App Store Release",
+      "module": "Mobile App",
+      "public": {
+        "summary": "Privacidad Apple Store",
+        "customer_description": "Dudas sobre qué completar en la ficha de privacidad.",
+        "public_thread": [
+          {
+            "at": "2026-02-14T11:00:00-03:00",
+            "author": "tam",
+            "message": "Enviamos checklist con los datos que recolecta el SDK."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Low",
+        "priority": "P3",
+        "workaround": null,
+        "notes": "Resuelto vía guía de usuario."
+      },
+      "created_at": "2026-02-14T11:00:00-05:00",
+      "first_response_at": "2026-02-14T11:00:00-03:00",
+      "closed_at": "2026-02-14T15:00:00-05:00",
+      "csat": 5
+    },
+    {
+      "ticket_id": "TCK-0019",
+      "status": "Open",
+      "client": {
+        "institution_name": "Cooperativa Sol del Sur",
+        "country": "EC"
+      },
+      "category": "Google Play Release",
+      "module": "Mobile App",
+      "public": {
+        "summary": "Rechazo Google Play",
+        "customer_description": "Google no nos deja subir la app por un tema de permisos.",
+        "public_thread": []
+      },
+      "internal": {
+        "severity": "Critical",
+        "priority": "P0",
+        "issue_family": "STORE_REJECTION_ANDROID",
+        "workaround": null,
+        "notes": "Sin respuesta al cliente aún. Investigando qué permiso sensible está causando el bloqueo."
+      },
+      "created_at": "2026-02-04T09:00:00-05:00",
+      "first_response_at": "2026-02-04T15:00:00-05:00",
+      "closed_at": null
+    },
+    {
+      "ticket_id": "TCK-0020",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Cooperativa Guaraní",
+        "country": "PY"
+      },
+      "category": "App Store Release",
+      "module": "Mobile App",
+      "public": {
+        "summary": "Consulta de publicación",
+        "customer_description": "Pasos para subir la 4.18.",
+        "public_thread": [
+          {
+            "at": "2026-01-30T09:50:00-03:00",
+            "author": "tam",
+            "message": "Enviamos checklist estándar."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Low",
+        "priority": "P3",
+        "workaround": null,
+        "notes": "Cerrado."
+      },
+      "created_at": "2026-01-30T09:50:00-05:00",
+      "first_response_at": "2026-01-30T09:50:00-03:00",
+      "closed_at": "2026-01-30T13:50:00-05:00",
+      "csat": 5
+    },
+    {
+      "ticket_id": "TCK-0021",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Banco Pacífico Centro",
+        "country": "SV"
+      },
+      "category": "Report Request",
+      "module": "Audit / Reporting",
+      "public": {
+        "summary": "Reporte especial auditoría",
+        "customer_description": "Necesitamos un listado de IPs de transferencias de ayer.",
+        "public_thread": [
+          {
+            "at": "2026-02-05T12:00:00-06:00",
+            "author": "tam",
+            "message": "Reporte enviado por correo."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "High",
+        "priority": "P1",
+        "workaround": null,
+        "notes": "Generado por SQL."
+      },
+      "created_at": "2026-02-05T15:00:00-05:00",
+      "first_response_at": "2026-02-05T12:00:00-06:00",
+      "closed_at": "2026-02-05T19:00:00-05:00",
+      "csat": 5
+    },
+    {
+      "ticket_id": "TCK-0022",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Caja Andina",
+        "country": "PE"
+      },
+      "category": "Report Request",
+      "module": "Admin Portal",
+      "public": {
+        "summary": "Reporte de transacciones fallidas",
+        "customer_description": "Motivos de falla del mes pasado.",
+        "public_thread": [
+          {
+            "at": "2026-02-09T08:40:00-05:00",
+            "author": "tam",
+            "message": "Enviado."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Medium",
+        "priority": "P2",
+        "workaround": null,
+        "notes": "CSV enviado."
+      },
+      "created_at": "2026-02-09T10:40:00-05:00",
+      "first_response_at": "2026-02-09T08:40:00-05:00",
+      "closed_at": "2026-02-09T14:40:00-05:00",
+      "csat": 4
+    },
+    {
+      "ticket_id": "TCK-0023",
+      "status": "In Progress",
+      "client": {
+        "institution_name": "Banco Azteca Norte",
+        "country": "MX"
+      },
+      "category": "Report Request",
+      "module": "Reconciliation",
+      "public": {
+        "summary": "Diferencias en conciliación",
+        "customer_description": "No nos coinciden los totales de pagos de servicios.",
+        "public_thread": [
+          {
+            "at": "2026-02-12T10:40:00-06:00",
+            "author": "tam",
+            "message": "Estamos cruzando los datos con el proveedor."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Medium",
+        "priority": "P2",
+        "workaround": null,
+        "notes": "Investigando desfase de horarios."
+      },
+      "created_at": "2026-02-12T13:40:00-05:00",
+      "first_response_at": "2026-02-12T10:40:00-06:00",
+      "closed_at": null
+    },
+    {
+      "ticket_id": "TCK-0024",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Banco Istmo",
+        "country": "PA"
+      },
+      "category": "Functional Question",
+      "module": "Business Banking",
+      "public": {
+        "summary": "Consulta maker-checker",
+        "customer_description": "¿Se puede pedir doble firma para pagos?",
+        "public_thread": [
+          {
+            "at": "2026-02-03T10:25:00-05:00",
+            "author": "tam",
+            "message": "Sí, se configura en roles empresariales."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Low",
+        "priority": "P3",
+        "workaround": null,
+        "notes": "Duda resuelta."
+      },
+      "created_at": "2026-02-03T12:25:00-05:00",
+      "first_response_at": "2026-02-03T10:25:00-05:00",
+      "closed_at": "2026-02-03T16:25:00-05:00",
+      "csat": 5
+    },
+    {
+      "ticket_id": "TCK-0025",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Cooperativa Maya Ahorro",
+        "country": "GT"
+      },
+      "category": "Functional Question",
+      "module": "QR Payments",
+      "public": {
+        "summary": "Límites QR",
+        "customer_description": "¿Cómo bajo el límite diario de QR?",
+        "public_thread": [
+          {
+            "at": "2026-02-10T10:00:00-06:00",
+            "author": "tam",
+            "message": "Desde el portal de administración, sección límites."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Low",
+        "priority": "P3",
+        "workaround": null,
+        "notes": "Cerrado."
+      },
+      "created_at": "2026-02-10T13:00:00-05:00",
+      "first_response_at": "2026-02-10T10:00:00-06:00",
+      "closed_at": "2026-02-10T17:00:00-05:00",
+      "csat": 5
+    },
+    {
+      "ticket_id": "TCK-0026",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Banco Azteca Norte",
+        "country": "MX"
+      },
+      "category": "Functional Question",
+      "module": "Transactions Feed",
+      "public": {
+        "summary": "Demora en refrescar movimientos",
+        "customer_description": "El socio dice que transfirió pero no lo ve en la lista enseguida.",
+        "public_thread": [
+          {
+            "at": "2026-01-22T08:00:00-06:00",
+            "author": "tam",
+            "message": "Es por el tiempo de sincronización del core."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Medium",
+        "priority": "P2",
+        "workaround": null,
+        "notes": "Caching normal."
+      },
+      "created_at": "2026-01-22T11:00:00-05:00",
+      "first_response_at": "2026-01-22T08:00:00-06:00",
+      "closed_at": "2026-01-22T15:00:00-05:00",
+      "csat": 4
+    },
+    {
+      "ticket_id": "TCK-0027",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Banco Azteca Norte",
+        "country": "MX"
+      },
+      "category": "Access Request",
+      "module": "Admin Portal",
+      "public": {
+        "summary": "Usuarios auditoría",
+        "customer_description": "Accesos de lectura por 30 días.",
+        "public_thread": [
+          {
+            "at": "2026-02-12T18:30:00-06:00",
+            "author": "tam",
+            "message": "Usuarios creados con expiración automática."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Medium",
+        "priority": "P2",
+        "workaround": null,
+        "notes": "OK."
+      },
+      "created_at": "2026-02-12T21:30:00-05:00",
+      "first_response_at": "2026-02-12T18:30:00-06:00",
+      "closed_at": "2026-02-13T01:30:00-05:00",
+      "csat": 3
+    },
+    {
+      "ticket_id": "TCK-0028",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Financiera Lenca",
+        "country": "HN"
+      },
+      "category": "Access Request",
+      "module": "API Access",
+      "public": {
+        "summary": "Rotación de credenciales",
+        "customer_description": "Seguridad nos pide cambiar las llaves de API ya.",
+        "public_thread": [
+          {
+            "at": "2026-02-07T11:20:00-06:00",
+            "author": "tam",
+            "message": "Llaves rotadas correctamente."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "High",
+        "priority": "P1",
+        "workaround": null,
+        "notes": "Emergencia por filtración interna del cliente."
+      },
+      "created_at": "2026-02-07T14:20:00-05:00",
+      "first_response_at": "2026-02-07T11:20:00-06:00",
+      "closed_at": "2026-02-07T18:20:00-05:00",
+      "csat": 4
+    },
+    {
+      "ticket_id": "TCK-0029",
+      "status": "Closed",
+      "client": {
+        "institution_name": "Cooperativa Altiplano",
+        "country": "BO"
+      },
+      "category": "Improvement Request",
+      "module": "Transfers",
+      "public": {
+        "summary": "Sugerencia favoritos",
+        "customer_description": "Estaría bueno poder guardar cuentas con nombres.",
+        "public_thread": [
+          {
+            "at": "2026-02-01T18:20:00-05:00",
+            "author": "tam",
+            "message": "Tomamos la sugerencia para el roadmap."
+          }
+        ]
+      },
+      "internal": {
+        "severity": "Low",
+        "priority": "P3",
+        "workaround": null,
+        "notes": "Pasado a Producto."
+      },
+      "created_at": "2026-02-01T20:20:00-05:00",
+      "first_response_at": "2026-02-01T18:20:00-05:00",
+      "closed_at": "2026-02-02T00:20:00-05:00",
+      "csat": 4
+    },
+    {
+      "ticket_id": "TCK-0030",
+      "status": "Escalated",
+      "client": {
+        "institution_name": "Cooperativa Sol del Sur",
+        "country": "EC"
+      },
+      "category": "Production Incident",
+      "module": "Balance / Accounts",
+      "public": {
+        "summary": "Saldo en cero intermitente",
+        "customer_description": "Varios reportes de gente que ve su cuenta vacía al entrar.",
+        "public_thread": []
+      },
+      "internal": {
+        "severity": "Critical",
+        "priority": "P0",
+        "issue_family": "BALANCE_CACHE_STALE",
+        "workaround": null,
+        "notes": "Escalado a Infraestructura. Sospechamos de un nodo de caché devolviendo datos nulos."
+      },
+      "created_at": "2026-02-15T09:00:00-05:00",
+      "first_response_at": "2026-02-15T15:00:00-05:00",
+      "closed_at": null
+    }
+  ]
+}

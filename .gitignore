@@ -1,0 +1,11 @@
+# Excluir app de incidentes (no subir a repo)
+incident-tickets-app/
+
+# Dependencias
+node_modules/
+
+# Sistema
+.DS_Store
+*.log
+.env
+.env.local
